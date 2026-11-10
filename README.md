@@ -1,69 +1,53 @@
 # equity-thesis-tracker
 
-A reproducible Python, SQL, pandas and NumPy project that turns a finished Citadel stock pitch memo on **GE Vernova (NYSE: GEV)** into a testable, trackable investment thesis and checks whether it held up after Q3 earnings on 2026-10-28.
+Right story, wrong price. That was my call on GE Vernova (NYSE: GEV). The demand is real, but the stock already pays for more than even strong execution can deliver. On October 1, 2026 I recommended a short at $987.45 with a 12-month target of $746, 25% below. This repo is where I test that call against what actually happened.
 
-## Thesis snapshot
+## The call
 
-| Item | Value |
-|------|-------|
-| Ticker | GEV (NYSE) |
+| | |
+|---|---|
 | Rating | SHORT |
-| Price at pitch (2026-10-01) | $987.45 |
-| Price target | $746 |
+| Price (10/01/26) | $987.45 |
+| Price target | $746 (25% downside) |
 | Bear / Base / Bull | $441 / $668 / $1,207 |
-| Scenario probabilities | 25% / 50% / 25% |
+| Probability | 25% / 50% / 25% |
 
-The target is the probability-weighted value: 0.25 x 441 + 0.50 x 668 + 0.25 x 1207 = 746, verified exactly in `tests/test_thesis.py`.
+## Why I'm short
 
-## Research question
+1. **The premium is bigger than the growth gap.** GEV trades at 26x consensus CY27E EBITDA (30x mine) against a 13.3x peer median and 20.6x for Eaton, the highest-rated peer.
+2. **Consensus margins run ahead of the company's own guide.** The Street has 17.9% for FY27E. The company guides 12-14% for FY26 and Q2 came in at 11.3%. My segment build gets to 16.0%.
+3. **Peak cash flow is being capitalized.** FY26 free cash flow guidance of $11.5-12.5B is lifted by customer down payments and slot reservations. I normalize FY27E to $3.9B.
 
-Did the market's reaction to the 2026-10-28 Q3 earnings, relative to peers, move toward the bear, base or bull scenario?
+## How the target is built
 
-## Roadmap
+Everything runs off FY27E adj. EBITDA. The base case is Eaton's 20.6x on my $8.2B, which gives $668. The bear case holds the margin at the FY26 guide (13%) at Schneider's 16.2x, which gives $441. The bull case is the Street's own $1,207. Weighted 25/50/25, that comes to exactly $746.
 
-- [x] 1. Repo and README skeleton
-- [ ] 2. SQL database: prices, peer multiples, financials (GEV, Eaton, Siemens Energy)
-- [ ] 3. Valuation module with tests reproducing the $746 target
-- [ ] 4. Metrics and event-study notebook around 2026-10-28
-- [ ] 5. Results memo with charts
-- [ ] 6. Polished final repo
+## What would prove me wrong
 
-Details and quantitative stretch goals for each step are in [docs/ROADMAP.md](docs/ROADMAP.md).
+I cover the short if any of these happen:
 
-## Repo layout
+- FY27 revenue guide at or above the $53B consensus
+- Adj. EBITDA margin above 17% for two straight quarters
+- Wind reaches EBITDA breakeven before FY27
+- The stock hits $1,207 (my stop)
+
+## What this repo does
+
+I'm building this to learn Python, SQL and statistics on a call I actually made. In order:
+
+- [x] 1. Repo setup
+- [ ] 2. SQL database of prices, peer multiples and financials for GEV and its peers
+- [ ] 3. Valuation code with tests that rebuild the $746 target
+- [ ] 4. Event study around Q3 earnings on October 28, 2026
+- [ ] 5. Results memo: did the thesis hold up
+- [ ] 6. Final cleanup
+
+## Run it
 
 ```
-config/       thesis inputs (single source of truth)
-src/          equity_thesis_tracker package (valuation, metrics, db helpers)
-sql/          schema and queries (deliverable 2)
-notebooks/    event study (deliverable 4)
-reports/      results memo and figures (deliverable 5)
-data/         raw and processed data (gitignored, rebuilt by scripts)
-tests/        pytest suite
+pip install -e ".[dev]"
+pytest
+python -m equity_thesis_tracker
 ```
 
-## Quickstart
-
-```bash
-git clone <your-repo-url> && cd equity-thesis-tracker
-python -m venv .venv && source .venv/bin/activate
-make install
-make test
-make summary
-```
-
-## Methodology
-
-_To be filled in as deliverables 3 and 4 are completed: valuation approach, event-study design, data sources and dates._
-
-## Results
-
-_To be filled in at deliverable 5._
-
-## Limitations
-
-_To be filled in at deliverable 5._
-
-## Disclaimer
-
-Educational project. Nothing here is investment advice.
+Student project. Not investment advice.
