@@ -1,6 +1,7 @@
 # equity-thesis-tracker
 
-Right story, wrong price. That was my call on GE Vernova (NYSE: GEV). The demand is real, but the stock already pays for more than even strong execution can deliver. On October 1, 2026 I recommended a short at $987.45 with a 12-month target of $746, 25% below. This repo is where I test that call against what actually happened.
+Right story, wrong price. That was my call on GE Vernova (NYSE: GEV). The demand is real, but the stock already pays for more than even strong execution can deliver. On October 2, 2026 I recommended a short on a price of $987.45 (as of October 1) with a 12-month target of $746, about 25% below.
+
 
 ## The call
 
