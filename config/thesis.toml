@@ -1,0 +1,31 @@
+# Single source of truth for the memo's inputs.
+# Numbers are strings on purpose: they are parsed into Decimal so no binary-float error creeps in.
+
+[thesis]
+ticker = "GEV"
+exchange = "NYSE"
+company = "GE Vernova"
+rating = "SHORT"
+price_date = "2026-10-01"
+price = "987.45"
+price_target = "746"
+
+[[scenario]]
+name = "bear"
+price = "441"
+probability = "0.25"
+
+[[scenario]]
+name = "base"
+price = "668"
+probability = "0.50"
+
+[[scenario]]
+name = "bull"
+price = "1207"
+probability = "0.25"
+
+[event]
+# Q3 earnings date used in the Deliverable 4 event study
+name = "Q3 2026 earnings"
+date = "2026-10-28"
